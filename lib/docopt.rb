@@ -279,7 +279,7 @@ module Docopt
     alias_method :current, :first
 
     def initialize(source, error)
-      source = source.split if source.respond_to? :split
+      source = source.split if source.is_a? String
       super source || []
       @error = error
     end
