@@ -548,13 +548,26 @@ class DocoptTest < MiniTest::Unit::TestCase
                  {'go' => 2, '<direction>' => ['left', 'right'], '--speed' => ['5', '9']}
   end
 
-  def test_options_first
-    args = docopt('usage: prog [<args>...]', argv: 'prog command --opt1 --opt2=val2',
+  def test_options_first_parse_as_argument
+    args = docopt('usage: prog [<args>...]', argv: 'command --opt1 --opt2=val2',
                   options_first: true)
-    assert_equal args, {'<args>' => %w(prog command --opt1 --opt2=val2)}
+    assert_equal args, {'<args>' => %w(command --opt1 --opt2=val2)}
 
     assert_raises Docopt::Exit do
-      docopt('usage: prog [<args>...]', argv: 'prog command --opt1 --opt2')
+      docopt('usage: prog [<args>...]', argv: 'command --opt1 --opt2')
+    end
+  end
+
+  def test_options_first_get_options
+    args = docopt('usage: prog --opt1 --opt2=<opt2>  [<args>...]',
+                  argv: '--opt1 --opt2=val2 command',
+                  options_first: true)
+    assert_equal args['--opt1'], true
+    assert_equal args['--opt2'], 'val2'
+    assert_equal args['<args>'], ['command']
+    assert_raises Docopt::Exit do
+      docopt('usage: prog [<args>...]', argv: '--opt1 --opt2=val2 command',
+             options_first: true)
     end
   end
 
