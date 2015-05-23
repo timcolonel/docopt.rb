@@ -3,10 +3,14 @@ require File.expand_path("../../lib/docopt.rb", __FILE__)
 
 require 'json'
 
-doc = STDIN.read
+doc = <<DOCOPT
+Usage:
+  #{__FILE__} demo [<args>...]
+  #{__FILE__} -v
+DOCOPT
 
 begin
-  puts Docopt::docopt(doc).to_json
+  puts Docopt.docopt(doc, options_first: true).to_json
 rescue Docopt::Exit => ex
   puts '"user-error"'
 end
