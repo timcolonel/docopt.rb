@@ -1,7 +1,7 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'docopt'
 
-class DocoptOptionTest < Test::Unit::TestCase
+class DocoptOptionTest < MiniTest::Unit::TestCase
 
   include Docopt
 
