@@ -549,9 +549,9 @@ class DocoptTest < MiniTest::Unit::TestCase
   end
 
   def test_options_first
-    args = docopt('usage: prog [<args>...]', argv: 'prog command --opt1 --opt2',
+    args = docopt('usage: prog [<args>...]', argv: 'prog command --opt1 --opt2=val2',
                   options_first: true)
-    assert_equal args, {'<args>' => %w(prog command --opt1 --opt2)}
+    assert_equal args, {'<args>' => %w(prog command --opt1 --opt2=val2)}
 
     assert_raises Docopt::Exit do
       docopt('usage: prog [<args>...]', argv: 'prog command --opt1 --opt2')
