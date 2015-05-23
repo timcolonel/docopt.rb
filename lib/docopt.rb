@@ -275,8 +275,8 @@ module Docopt
 
   class TokenStream < Array
     attr_reader :error
-    alias move shift
-    alias current first
+    alias_method :move, :shift
+    alias_method :current, :first
 
     def initialize(source, error)
       source = source.split if source.respond_to? :split

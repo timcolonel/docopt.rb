@@ -23,15 +23,15 @@ class DocoptOptionTest < MiniTest::Unit::TestCase
 
     assert_equal Option.parse('    -h'), Option.new('-h')
 
-    assert_equal Option.parse('-h TOPIC  Descripton... [default: 2]'),
+    assert_equal Option.parse('-h TOPIC  Description... [default: 2]'),
                  Option.new('-h', nil, 1, '2')
-    assert_equal Option.parse('-h TOPIC  Descripton... [default: topic-1]'),
+    assert_equal Option.parse('-h TOPIC  Description... [default: topic-1]'),
                  Option.new('-h', nil, 1, 'topic-1')
     assert_equal Option.parse('--help=TOPIC  ... [default: 3.14]'),
                  Option.new(nil, '--help', 1, '3.14')
     assert_equal Option.parse('-h, --help=DIR  ... [default: ./]'),
-                 Option.new('-h', '--help', 1, "./")
-    assert_equal Option.parse('-h TOPIC  Descripton... [dEfAuLt: 2]'),
+                 Option.new('-h', '--help', 1, './')
+    assert_equal Option.parse('-h TOPIC  Description... [dEfAuLt: 2]'),
                  Option.new('-h', nil, 1, '2')
 
   end
